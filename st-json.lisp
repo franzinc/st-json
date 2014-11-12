@@ -1,3 +1,10 @@
+
+#+(and allegro (version= 9 0))
+(sys:defpatch "st-json" 0
+  "v0: added to ACL 9.0."
+  :type :system
+  :post-loadable t)
+
 (defpackage :st-json
   (:use :common-lisp)
   (:export #:read-json #:read-json-as-type #:read-json-from-string
