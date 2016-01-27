@@ -1,3 +1,6 @@
+;; -*- mode: common-lisp; package: st-json -*-
+;;
+;; See LICENSE for the license for this software
 
 #+(and allegro (version= 9 0))
 (sys:defpatch "st-json" 0
@@ -328,3 +331,5 @@ Raises a json-type-error when the type is wrong."
          (write-char #\, stream))
      (write-json-element part stream)))
   (write-char #\] stream))
+
+(provide :st-json)
