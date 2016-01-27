@@ -2,6 +2,12 @@
 ;;
 ;; See LICENSE for the license for this software
 
+#+(and allegro (version= 10 0))
+(sys:defpatch "st-json" 1
+  "v1: add provide."
+  :type :system
+  :post-loadable t)
+
 #+(and allegro (version= 9 0))
 (sys:defpatch "st-json" 0
   "v0: added to ACL 9.0."
