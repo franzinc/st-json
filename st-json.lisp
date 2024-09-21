@@ -155,7 +155,7 @@ Raises a json-type-error when the type is wrong."
                    (case escaped
                      (#\u (read-unicode))
                      (#\b #\backspace) (#\n #\newline) (#\r #\return)
-                     (#\t #\tab) (#\f #\page) (t escaped)))
+                     (#\t #\tab) #-allegro (#\f #\page) #+allegro (#\f #\ff) (t escaped)))
                  char))
            (read-unicode ()
              (code-char (loop :for pos :from 0 :below 4
@@ -316,7 +316,10 @@ Raises a json-type-error when the type is wrong."
                    (#.(char-code #\backspace) (write-string "\\b" stream))
                    (#.(char-code #\newline)   (write-string "\\n" stream))
                    (#.(char-code #\return)    (write-string "\\r" stream))
+		   #-allegro
                    (#.(char-code #\page)      (write-string "\\f" stream))
+		   #+allegro
+                   (#.(char-code #\ff)      (write-string "\\f" stream))
                    (#.(char-code #\tab)       (write-string "\\t" stream))
                    (t                         (format stream "\\u~4,'0x" code)))
                  (case code
@@ -333,7 +336,10 @@ Raises a json-type-error when the type is wrong."
                    (#.(char-code #\backspace) (write-string "\\b" stream))
                    (#.(char-code #\newline)   (write-string "\\n" stream))
                    (#.(char-code #\return)    (write-string "\\r" stream))
+		   #-allegro
                    (#.(char-code #\page)      (write-string "\\f" stream))
+		   #+allegro
+                   (#.(char-code #\ff)      (write-string "\\f" stream))
                    (#.(char-code #\tab)       (write-string "\\t" stream))
                    (t                         (format stream "\\u~4,'0x" code)))
                  (case code
